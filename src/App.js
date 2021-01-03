@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import FunctionContextComponent from './FunctionContextComponent'
+import { ThemeProvider } from './ThemeContext'
 
-function App() {
+//1. ThemeProvider
+//wraps all the logic for handling our state, updating our state, and pushing out those diff values to all of our children
+
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+      <ThemeProvider>
+        <FunctionContextComponent />
+      </ThemeProvider>
+  )
 }
 
-export default App;
+/*
+when using context, it's broken into 2 different sections
+context provider ("ThemeContext.Provider") which is what you want to wrap all of the code that needs access to the information in the context and it has a single prop called 'value' which is going to be whatever your value of the context is
+important: everything inside provider, all components, and children, and children, and so on, all have access to the variable in the 'value' prop in the context provider
+important**: context is for passing down props essentially all the way down to any of the children without having to manually pass 'darkThemeProp={darkTheme}' in each first level child component of a provider parent component
+*/
